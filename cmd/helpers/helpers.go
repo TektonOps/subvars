@@ -15,7 +15,6 @@ type Flags struct {
 	MissingKey string
 }
 
-
 var GlobalOpts Flags
 
 // GetVars will get all the environment variables

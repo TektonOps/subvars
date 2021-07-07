@@ -32,10 +32,10 @@ func main() {
 		&cli.StringFlag{
 			Destination: &helpers.GlobalOpts.MissingKey,
 			Name:        "missingkey",
-			Usage:       "Behavior for missing key when parsing variables." +
+			Usage: "Behavior for missing key when parsing variables." +
 				"Available options 'invalid', 'error' or 'zero'",
-			EnvVars:     []string{"SUBVARS_MISSINGKEY"},
-			Value:       "invalid",
+			EnvVars: []string{"SUBVARS_MISSINGKEY"},
+			Value:   "invalid",
 		},
 	}
 
