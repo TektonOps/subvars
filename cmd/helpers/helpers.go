@@ -67,6 +67,7 @@ func GetPathInDir(dirpath string) ([]string, error) {
 	return paths, nil
 }
 
+// CreateDirIfNotExist will check if folder does not exist it will create it.
 func CreateDirIfNotExist(path string) error {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		if err = os.Mkdir(path, os.ModePerm); err != nil {
