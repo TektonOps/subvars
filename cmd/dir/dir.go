@@ -1,7 +1,6 @@
 package dir
 
 import (
-
 	"os"
 	"path"
 	"path/filepath"
@@ -14,8 +13,8 @@ import (
 )
 
 type Directory struct {
-	Path   string
-	OutDir string
+	InputDir string
+	OutDir   string
 }
 
 func Render() *cli.Command {
@@ -23,25 +22,25 @@ func Render() *cli.Command {
 	return &cli.Command{
 		Name:    "dir",
 		Aliases: []string{"d"},
-		Usage:   "Directory lets you render all files in a folder & sub folder.",
+		Usage:   "Directory lets you render all files in a folder & subfolder.",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Destination: &subVarsOpts.Path,
+				Destination: &subVarsOpts.InputDir,
 				Name:        "input",
 				Aliases:     []string{"i"},
-				Usage:       "Path of folder containing template file.s",
+				Usage:       "Path of folder containing template files.",
 				EnvVars:     []string{"SUBVARS_INPUTDIR"},
 			},
 			&cli.StringFlag{
 				Destination: &subVarsOpts.OutDir,
 				Name:        "out",
 				Aliases:     []string{"o"},
-				Usage:       "Output folder path. If folder does not exist it will be created.",
+				Usage:       "Output folder path. If folder does not exist it will be created automatically.",
 				EnvVars:     []string{"SUBVARS_OUTDIR"},
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-			paths, err := helpers.GetPathInDir(subVarsOpts.Path)
+			paths, err := helpers.GetPathInDir(subVarsOpts.InputDir)
 			if err != nil {
 				return err
 			}
@@ -70,10 +69,10 @@ func Render() *cli.Command {
 						return err
 					}
 					file.Close()
-					return nil
-				}
-				if err := t.Execute(os.Stdout, helpers.EnvVariables); err != nil {
-					return err
+				} else {
+					if err := t.Execute(os.Stdout, helpers.EnvVariables); err != nil {
+						return err
+					}
 				}
 			}
 
