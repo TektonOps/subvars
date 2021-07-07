@@ -9,31 +9,34 @@ jobs:
   release-subvars:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0
-      -
-        name: Set up Go
+      
+      - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
-      -
-        name: Cache Go modules
+      
+      - name: Cache Go modules
         uses: actions/cache@v2.1.5
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      -
-        name: Diff
+      
+      - name: Diff
         run: git diff
       
+      - name: Docker Login DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      -
-        name: Release SubVars
+      - name: Release SubVars
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
@@ -41,8 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-      - 
-        name: Notify on failure
+      - name: Notify on failure
         uses: kha7iq/pingme-action@v1
         if: failure()
         env:
@@ -53,8 +55,7 @@ jobs:
         with:
           service: telegram
 
-      - 
-        name: Notify on success
+      - name: Notify on success
         uses: kha7iq/pingme-action@v1
         if: success()
         env:
