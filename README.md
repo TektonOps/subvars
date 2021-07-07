@@ -49,7 +49,11 @@ at the [contributing guide](https://github.com/kha7iq/subvars/blob/master/CONTRI
 
 ## Show your support
 
-Give a ⭐️  if you like this project! Fork it! Make it better!
+Give a ⭐️  if you like this project!
+
+Fork it ⚙️
+
+Make it better 🕶️
 
 ## Acknowledgments
 
