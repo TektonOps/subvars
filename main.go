@@ -51,16 +51,12 @@ func main() {
 		}
 
 		if len(helpers.GlobalOpts.Prefix) != 0 {
-			vars := helpers.MatchPrefix(helpers.GlobalOpts.Prefix)
-			t = t.Option("missingkey=" + helpers.GlobalOpts.MissingKey)
-			if err := t.Execute(os.Stdout, vars); err != nil {
-				return err
-			}
-			return nil
+			helpers.EnvVariables = helpers.MatchPrefix(helpers.GlobalOpts.Prefix)
+		} else {
+			helpers.EnvVariables = helpers.GetVars()
 		}
-		vars := helpers.GetVars()
 		t = t.Option("missingkey=" + helpers.GlobalOpts.MissingKey)
-		if err := t.Execute(os.Stdout, vars); err != nil {
+		if err := t.Execute(os.Stdout, helpers.EnvVariables); err != nil {
 			return err
 		}
 		return nil

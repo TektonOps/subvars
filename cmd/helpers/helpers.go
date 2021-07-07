@@ -15,7 +15,10 @@ type Flags struct {
 	MissingKey string
 }
 
-var GlobalOpts Flags
+var (
+	GlobalOpts   Flags
+	EnvVariables map[string]interface{}
+)
 
 // GetVars will get all the environment variables
 func GetVars() (enVars map[string]interface{}) {
@@ -34,8 +37,8 @@ func ParseString(str string) (*template.Template, error) {
 }
 
 // MatchPrefix will match a given prefix pattern of all env variables and render only those.
-func MatchPrefix(prefix string) map[string]string {
-	enVars := make(map[string]string)
+func MatchPrefix(prefix string) map[string]interface{} {
+	enVars := make(map[string]interface{})
 	for _, value := range os.Environ() {
 		kv := strings.SplitN(value, "=", 2)
 		if strings.HasPrefix(kv[0], prefix) {
@@ -62,4 +65,14 @@ func GetPathInDir(dirpath string) ([]string, error) {
 	}
 
 	return paths, nil
+}
+
+func CreateDirIfNotExist(path string) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		if err = os.Mkdir(path, os.ModePerm); err != nil {
+			return err
+		}
+		return err
+	}
+	return nil
 }
