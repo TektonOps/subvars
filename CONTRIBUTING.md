@@ -5,7 +5,7 @@ possible.
 
 ## Project structure
 - `cmd` - Contains the file and helpers package.
-  - `file` Content related to file parsing.
+  - `dir` Content related to folder parsing.
   - `helpers` Helper functions.
   
 ### Documentation
