@@ -13,8 +13,8 @@ import (
 )
 
 type Directory struct {
-	Path    string
-	OutDir  string
+	Path   string
+	OutDir string
 }
 
 func Render() *cli.Command {
