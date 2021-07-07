@@ -35,7 +35,7 @@ func main() {
 			Name:        "missingkey",
 			Aliases:     []string{"m"},
 			Usage: "Behavior for missing key when parsing variables." +
-				"Available options 'invalid', 'error' or 'zero'",
+				" Available options 'invalid', 'error' or 'zero'",
 			EnvVars: []string{"SUBVARS_MISSINGKEY"},
 			Value:   "invalid",
 		},
