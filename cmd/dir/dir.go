@@ -1,4 +1,4 @@
-package file
+package dir
 
 import (
 	"os"
@@ -20,14 +20,14 @@ func Render() *cli.Command {
 	return &cli.Command{
 		Name:    "dir",
 		Aliases: []string{"d"},
-		Usage:   "input from a file",
+		Usage:   "Directory lets you render all files in a folder & sub folder.",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Destination: &subVarsOpts.Path,
-				Name:        "name",
-				Aliases:     []string{"n"},
-				Usage:       "Name of directory containing template files ",
-				EnvVars:     []string{"SUBVARS_DIR_NAME"},
+				Name:        "path",
+				Aliases:     []string{"p"},
+				Usage:       "Path of folder containing template file.s",
+				EnvVars:     []string{"SUBVARS_DIR_PATH"},
 			},
 		},
 		Action: func(ctx *cli.Context) error {

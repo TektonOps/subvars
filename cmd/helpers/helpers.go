@@ -7,34 +7,18 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/sprig"
-	"github.com/urfave/cli/v2"
 )
 
+// Flags struct holds inputs values for global flags
 type Flags struct {
 	Prefix     string
 	MissingKey string
 }
 
-var (
-	GlobalOpts Flags
 
-	GlobalFlags = []cli.Flag{
-		&cli.StringFlag{
-			Name:        "prefix, pr",
-			Usage:       "Match only variables with given prefix pattern",
-			Destination: &GlobalOpts.Prefix,
-			EnvVars:     []string{"SUBVARS_PREFIX_PATTERN"},
-		},
-		&cli.StringFlag{
-			Destination: &GlobalOpts.MissingKey,
-			Name:        "missingkey",
-			Usage:       "Behavior for missing key when parsing variables",
-			EnvVars:     []string{"SUBVARS_MISSINGKEY"},
-			Value:       "default",
-		},
-	}
-)
+var GlobalOpts Flags
 
+// GetVars will get all the environment variables
 func GetVars() (enVars map[string]interface{}) {
 	enVars = make(map[string]interface{})
 	for _, value := range os.Environ() {
@@ -44,16 +28,13 @@ func GetVars() (enVars map[string]interface{}) {
 	return
 }
 
+// ParseString will parse any input provided as string
 func ParseString(str string) (*template.Template, error) {
 	funcMap := sprig.TxtFuncMap()
 	return template.Must(template.New("").Funcs(funcMap).Parse(str)), nil
 }
 
-func ParseFiles(files ...string) (*template.Template, error) {
-	funcMap := sprig.TxtFuncMap()
-	return template.Must(template.New(filepath.Base(files[0])).Funcs(funcMap).ParseFiles(files...)), nil
-}
-
+// MatchPrefix will match a given prefix pattern of all env variables and render only those.
 func MatchPrefix(prefix string) map[string]string {
 	enVars := make(map[string]string)
 	for _, value := range os.Environ() {
@@ -63,4 +44,23 @@ func MatchPrefix(prefix string) map[string]string {
 		}
 	}
 	return enVars
+}
+
+// GetPathInDir Recursively get all file paths in directory, including sub-directories.
+func GetPathInDir(dirpath string) ([]string, error) {
+	var paths []string
+	err := filepath.Walk(dirpath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return paths, nil
 }
