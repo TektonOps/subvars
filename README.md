@@ -14,10 +14,10 @@
    <a href="https://goreportcard.com/report/github.com/kha7iq/subvars">
    <img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/kha7iq/subvars">
    <a href="#">
-   <img alt="Build" src="https://img.shields.io/github/workflow/status/kha7iq/subvars/goreleaser">
+   <img alt="Build" src="https://img.shields.io/github/workflow/status/kha7iq/subvars/build">
    <a href="https://github.com/kha7iq/subvars/issues">
    <img alt="GitHub issues" src="https://img.shields.io/github/issues/kha7iq/subvars?style=flat-square&logo=github&logoColor=white">
-   <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE.md">
+   <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE">
    <img alt="License" src="https://img.shields.io/github/license/kha7iq/subvars">
    <a href="https://pkg.go.dev/github.com/kha7iq/subvars">
    <img alt="Go Dev Reference" src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat">
