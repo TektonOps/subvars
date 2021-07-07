@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Masterminds/sprig"
+	"github.com/Masterminds/sprig/v3"
 )
 
 // Flags struct holds inputs values for global flags

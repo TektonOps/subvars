@@ -1,12 +1,13 @@
 package dir
 
 import (
+
 	"os"
 	"path"
 	"path/filepath"
 	"text/template"
 
-	"github.com/Masterminds/sprig"
+	"github.com/Masterminds/sprig/v3"
 
 	"github.com/kha7iq/subvars/cmd/helpers"
 	"github.com/urfave/cli/v2"
