@@ -1,7 +1,7 @@
 package main
 
 import (
-	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -24,7 +24,8 @@ func main() {
 	app.Usage = "Substitute environment variables defined as go templates."
 	app.Flags = []cli.Flag{
 		&cli.StringFlag{
-			Name:        "prefix, pr",
+			Name:        "prefix",
+			Aliases:     []string{"pr"},
 			Usage:       "Match only variables with given prefix pattern",
 			Destination: &helpers.GlobalOpts.Prefix,
 			EnvVars:     []string{"SUBVARS_PREFIX"},
@@ -32,6 +33,7 @@ func main() {
 		&cli.StringFlag{
 			Destination: &helpers.GlobalOpts.MissingKey,
 			Name:        "missingkey",
+			Aliases:     []string{"m"},
 			Usage: "Behavior for missing key when parsing variables." +
 				"Available options 'invalid', 'error' or 'zero'",
 			EnvVars: []string{"SUBVARS_MISSINGKEY"},
@@ -42,12 +44,12 @@ func main() {
 	app.Action = func(c *cli.Context) error {
 		b, err := ioutil.ReadAll(os.Stdin)
 		if err != nil {
-			return errors.New("unable to read input")
+			return fmt.Errorf("unable to read input \nERROR: %v\n", err)
 		}
 
 		t, err := helpers.ParseString(string(b))
 		if err != nil {
-			return errors.New("error parsing string stream")
+			return fmt.Errorf("unable to parse string stream \nERROR: %v\n", err)
 		}
 
 		if len(helpers.GlobalOpts.Prefix) != 0 {
