@@ -41,23 +41,23 @@ archives:
     - goos: windows
       format: zip
 
-#brews:
-#  - tap:
-#      owner: kha7iq
-#      name: homebrew-tap
-#    folder: Formula
-#    homepage: subvars.lmno.pk
-#    description: SubVars tool parse and substitute golang template variables.
-#    license: MIT
-#    test: |
-#      system "#{bin}/subvars -v"
-#    install: |-
-#      bin.install "subvars"
+brews:
+ - tap:
+     owner: kha7iq
+     name: homebrew-tap
+   folder: Formula
+   homepage: subvars.lmno.pk
+   description: Substitute environment variables from command line in config files defined as go template format.
+   license: MIT
+   test: |
+     system "#{bin}/subvars -v"
+   install: |-
+     bin.install "subvars"
 
 nfpms:
   - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
     homepage:  subvars.lmno.pk
-    description: SubVars tool parse and substitute golang template variables.
+    description: Substitute environment variables from command line in config files defined as go template format.
     license: MIT
     formats:
     - deb
@@ -66,28 +66,26 @@ nfpms:
     - git
 
 
-#scoop:
-#  url_template: "https://github.com/kha7iq/subvars/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-#  bucket:
-#    owner: kha7iq
-#    name: scoop-bucket
-#  homepage:  https://subvars.lmno.pk
-#  description: SubVars tool parse and substitute golang template variables.
-#  license: MIT
+scoop:
+ url_template: "https://github.com/kha7iq/subvars/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+ bucket:
+   owner: kha7iq
+   name: scoop-bucket
+ homepage:  https://subvars.lmno.pk
+ description: Substitute environment variables from command line in config files defined as go template format.
+ license: MIT
 
 
-# dockers:
-# - image_templates:
-#   - 'khaliq/subvars:{{ .Tag }}'
-#   - 'khaliq/subvars:latest'
-#   - 'ghcr.io/kha7iq/subvars:{{ .Tag }}'
-#   - 'ghcr.io/kha7iq/subvars:latest'
-#   dockerfile: Dockerfile
-#   build_flag_templates:
-#   - "--pull"
-#   - "--label=org.opencontainers.image.created={{.Date}}"
-#   - "--label=org.opencontainers.image.name={{.ProjectName}}"
-#   - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-#   - "--label=org.opencontainers.image.version={{.Version}}"
-#   - "--label=org.opencontainers.image.source={{.GitURL}}"
-#   - "--platform=linux/amd64"
+dockers:
+- image_templates:
+  - 'khaliq/subvars:{{ .Tag }}'
+  - 'khaliq/subvars:latest'
+  dockerfile: Dockerfile
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
