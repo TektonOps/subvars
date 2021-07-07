@@ -1,8 +1,9 @@
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable-next-line -->
+
 <h2 align="center">
   <br>
-  <p align="center"><img width=30% src="https://github.com/kha7iq/subvars/blob/master/.github/img/logo.png"></p>
+  <p align="center"><img width=30% src="https://raw.githubusercontent.com/kha7iq/subvars/master/.github/img/logo.png"></p>
 </h2>
 
 <h4 align="center">SubVars CLI</h4>
@@ -18,7 +19,6 @@
    <img alt="GitHub issues" src="https://img.shields.io/github/issues/kha7iq/subvars?style=flat-square&logo=github&logoColor=white">
    <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE.md">
    <img alt="License" src="https://img.shields.io/github/license/kha7iq/subvars">
-   <a href="https://github.com/agarrharr/awesome-cli-apps#devops">
    <img alt="Go Dev Reference" src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat">
 </p>
 
