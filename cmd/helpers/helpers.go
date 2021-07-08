@@ -17,12 +17,12 @@ type Flags struct {
 
 var (
 	GlobalOpts   Flags
-	EnvVariables map[string]interface{}
+	EnvVariables map[string]string
 )
 
 // GetVars will get all the environment variables
-func GetVars() (enVars map[string]interface{}) {
-	enVars = make(map[string]interface{})
+func GetVars() (enVars map[string]string) {
+	enVars = make(map[string]string)
 	for _, value := range os.Environ() {
 		kv := strings.SplitN(value, "=", 2)
 		enVars[kv[0]] = kv[1]
@@ -37,8 +37,8 @@ func ParseString(str string) (*template.Template, error) {
 }
 
 // MatchPrefix will match a given prefix pattern of all env variables and render only those.
-func MatchPrefix(prefix string) map[string]interface{} {
-	enVars := make(map[string]interface{})
+func MatchPrefix(prefix string) map[string]string {
+	enVars := make(map[string]string)
 	for _, value := range os.Environ() {
 		kv := strings.SplitN(value, "=", 2)
 		if strings.HasPrefix(kv[0], prefix) {
