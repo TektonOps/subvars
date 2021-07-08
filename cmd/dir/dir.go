@@ -47,7 +47,7 @@ func Render() *cli.Command {
 
 			for _, v := range paths {
 				funcMap := sprig.TxtFuncMap()
-				t := template.Must(template.New(filepath.Base(v)).Funcs(funcMap).ParseFiles(v))
+				t := template.Must(template.New(filepath.Base(v)).Funcs(funcMap).Funcs(helpers.MatchFunc()).ParseFiles(v))
 
 				if len(helpers.GlobalOpts.Prefix) != 0 {
 					helpers.EnvVariables = helpers.MatchPrefix(helpers.GlobalOpts.Prefix)

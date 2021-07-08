@@ -33,7 +33,7 @@ func GetVars() (enVars map[string]string) {
 // ParseString will parse any input provided as string
 func ParseString(str string) (*template.Template, error) {
 	funcMap := sprig.TxtFuncMap()
-	return template.Must(template.New("").Funcs(funcMap).Parse(str)), nil
+	return template.Must(template.New("").Funcs(funcMap).Funcs(MatchFunc()).Parse(str)), nil
 }
 
 // MatchPrefix will match a given prefix pattern of all env variables and render only those.
@@ -76,4 +76,12 @@ func CreateDirIfNotExist(path string) error {
 		return err
 	}
 	return nil
+}
+
+// MatchFunc returns a custom functions map
+func MatchFunc() template.FuncMap {
+	var functionMap = map[string]interface{}{
+		"match": MatchPrefix,
+	}
+	return functionMap
 }
