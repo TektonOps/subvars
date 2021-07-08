@@ -44,12 +44,12 @@ func main() {
 	app.Action = func(c *cli.Context) error {
 		b, err := ioutil.ReadAll(os.Stdin)
 		if err != nil {
-			return fmt.Errorf("unable to read input \nERROR: %v\n", err)
+			return fmt.Errorf("unable to read input \nError: %v", err)
 		}
 
 		t, err := helpers.ParseString(string(b))
 		if err != nil {
-			return fmt.Errorf("unable to parse string stream \nERROR: %v\n", err)
+			return fmt.Errorf("unable to parse string stream \nError: %v", err)
 		}
 
 		if len(helpers.GlobalOpts.Prefix) != 0 {
