@@ -18,11 +18,11 @@
    <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE.md">
    <img alt="License" src="https://img.shields.io/github/license/kha7iq/subvars">
    <a href="https://pkg.go.dev/github.com/kha7iq/subvars">
-   <img alt="Go Dev Reference" src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat">
+   <img alt="Go Dev Reference" src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat"></a></a></a></a></a></a>
 </p>
 
 <p align="center">
-  <a href="https://kha7iq.github.io/subvars">Documentation</a> •
+  <a href="https://subvars.lmno.pk">Documentation</a> •
   <a href="#installation">Install</a> •
   <a href="#configuration">Configuration</a> •
   <a href="#contributing">Contributing</a> •
@@ -89,7 +89,7 @@ Usage examples for workflow are available in the repo.
 ## Usage
 
 ```bash
-❯ subvars
+❯ subvars --help
 
 NAME:
    subvars - Substitute environment variables defined as go templates.
