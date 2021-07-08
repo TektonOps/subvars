@@ -44,7 +44,7 @@ It uses [sprig v3](https://github.com/Masterminds/sprig) for [template functions
 brew install kha7iq/tap/subvars
 ```
 
-## Linux Binary
+### Linux Binary
 
 ```bash
 export SUBVARS_VERSION="0.1.0"
@@ -111,14 +111,14 @@ GLOBAL OPTIONS:
    --version, -v                 print the version (default: false)
 ```
 
-Check [Documentation Page](https://kha7iq.github.io/subvars/#/) for more details.
+Check [Documentation Page](https://subvars.lmno.pk) for more details.
 
 ## Configuration
 
 All the flags have corresponding environment variables associated with it. You
 can either provide the value with flags or export to a variable.
 
-View the [Documentation Page](https://kha7iq.github.io/subvars/#/) for more
+View the [Documentation Page](https://subvars.lmno.pk) for more
 details.
 
 
@@ -138,4 +138,4 @@ Make it better 🕶️
 
 ## Acknowledgments
 
-This tool was inspired by the orignal [python envtpl](https://github.com/subfuzion/envtpl/) project and [subfuzion/envtpl](https://github.com/subfuzion/envtpl/)
+This tool was inspired by the orignal [python envtpl](https://github.com/andreasjansson/envtpl) project and [subfuzion/envtpl](https://github.com/subfuzion/envtpl/)
