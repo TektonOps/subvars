@@ -16,20 +16,21 @@ possible.
 
 ### Checking Locally
 
-Docsify is used for documentation rendering from markdown, you can download
+Mkdocs is used for documentation rendering from markdown, you can download
 the cli and test locally before opening a pull request.
 
 ### Install
 
 ```bash
-npm i docsify-cli -g
-# yarn global add docsify-cli
+pip install mkdocs-material
+pip install mdx_include
+pip install mkdocs-minify-plugin
 ```
 
 ### Serve locally
 
 ```bash
-docsify serve docs
+mkdocs serve
 ```
 
 ## Commits
