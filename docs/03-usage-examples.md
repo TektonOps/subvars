@@ -13,10 +13,6 @@ ALERT_THRESHOLD=2 subvars < prometheus_alert.conf
 ```
 
 ```bash
-echo "Hey! {{ .USER | upper }} your home folder is {{ .HOME }}" | subvars
-```
-
-```bash
 subvars < file.txt > file2.txt
 ```
 
@@ -27,9 +23,8 @@ subvars dir --input examples --out newdir
 ## Template Functions
 
 In addition to the standard set of template actions and functions
-that come with Go, `subvars` also incorporates [sprig] for additional, commonly used functions.
+that come with Go, `subvars` also incorporates sprig for additional, commonly used functions.
 
-i.e
 ```bash
 echo "Hey! {{ .USER | upper }} your home folder is {{ .HOME }}" | subvars
 ```
