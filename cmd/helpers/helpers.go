@@ -80,7 +80,7 @@ func CreateDirIfNotExist(path string) error {
 
 // MatchFunc returns a custom functions map
 func MatchFunc() template.FuncMap {
-	var functionMap = map[string]interface{}{
+	functionMap := map[string]interface{}{
 		"match": MatchPrefix,
 	}
 	return functionMap
