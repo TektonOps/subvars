@@ -9,10 +9,10 @@ brew install kha7iq/tap/subvars
 ### Linux Binary
 
 ```bash
-export SUBVARS_VERSION="0.1.0"
-wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz
-tar -xf subvars_Darwin_x86_64.tar.gz
-chmod +x subvars
+export SUBVARS_VERSION="0.1.2"
+wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz && \
+tar -xf subvars_Darwin_x86_64.tar.gz && \
+chmod +x subvars && \
 sudo mv subvars /usr/local/bin/subvars
 ```
 
@@ -34,13 +34,10 @@ and download the binary for windows & all other supported platforms.
 
 ### Docker
 
-Docker container is also available.
+Docker container is available you can pull the `latest` version or provide specific `tag`
+Checkout [release](https://github.com/kha7iq/subvars/releases) page for available versions.
 
-`latest` tage will always pull the latest version avaialbe, you can also download
-specific version. Checkout [release](https://github.com/kha7iq/subvars/releases)
-page for available versions.
-
-#### Running Container
+* Running Container
 
 ```bash
 docker pull khaliq/subvars:latest
