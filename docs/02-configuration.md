@@ -32,20 +32,19 @@ subvars dir [command options] [arguments...]
 
 ### Prefix
 Prefix flag `--prefix` will match a given prefix pattern of all env variables and render only matching the prefixIt can also be configured by exporting environment variable `SUBVARS_PREFIX`.
-For detailed example please check the examples page.
+
 
 ### Input
 Input flag `--input` is available for the subcommand `dir`, when using subcommand you can specify an input folder containing the template files.
 
 It can also be configured by exporting environment variable `SUBVARS_INPUTDIR`.
-For detailed example please check the examples page.
 
-### OutDir
-Input flag `--outdir` is available for the subcommand `dir`, when using subcommand you can specify an out folder where rendered files will be saved.
 
-If the folder does not exist it will be created automatically, the ouput filename will remain the same as input templates.
+### Out
+Input flag `--out` is available for the subcommand `dir`, when using subcommand you can specify an output folder where rendered files will be saved.
+
+If the folder does not exist it will be created automatically, the output filename will remain the same as input templates.
 
 This setting can also be configured by exporting environment variable `SUBVARS_OUTDIR`.
 
-For detailed example please check the examples page.
-
+For more details please check the [examples](03-usage-examples.md) page.

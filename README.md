@@ -1,6 +1,3 @@
-<!-- markdownlint-disable MD033 -->
-<!-- markdownlint-disable-next-line -->
-
 <h2 align="center">
   <br>
   <p align="center"><img width=30% src="https://raw.githubusercontent.com/kha7iq/subvars/master/.github/img/logo.png"></p>
@@ -23,7 +20,7 @@
 
 <p align="center">
   <a href="https://subvars.lmno.pk">Documentation</a> •
-  <a href="#installation">Install</a> •
+  <a href="#installation">Installation</a> •
   <a href="#configuration">Configuration</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#show-your-support">Show Your Support</a>
@@ -32,9 +29,19 @@
 ---
 
 ## About
-Substitute Variables (subvars) is a small utility which provides a way to render any [Go templates](https://golang.org/pkg/text/template/) from command line recognizing the object being passed in and drawing attributes from the object to create wanted text. It is very useful for template driven configuration files.
+Substitute Variables (subvars) is a small utility which provides a way to render any [Go templates](https://golang.org/pkg/text/template/) 
+from command line recognizing the object being passed in and drawing attributes from the object to create wanted text. 
+It is very useful for template driven configuration files.
 
-It uses [sprig v3](https://github.com/Masterminds/sprig) for [template functions](https://masterminds.github.io/sprig) which provides additional functions apart from standard library.
+It uses [sprig v3](https://github.com/Masterminds/sprig) for [template functions](https://masterminds.github.io/sprig) 
+which provides additional functions apart from standard library.
+
+`subvars` reads input from `stdin` and renders output to `stdout`. 
+You can pipe the input or `<` direct it to subvars.
+
+Options to [render all files](https://subvars.lmno.pk/03-usage-examples/) in a given folder
+and output to another folder is available via `dir` subcommand.
+
 
 ## Installation
 
@@ -47,17 +54,11 @@ brew install kha7iq/tap/subvars
 ### Linux Binary
 
 ```bash
-export SUBVARS_VERSION="0.1.0"
-wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz
-tar -xf subvars_Darwin_x86_64.tar.gz
-chmod +x subvars
+export SUBVARS_VERSION="0.1.2"
+wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz && \
+tar -xf subvars_Darwin_x86_64.tar.gz && \
+chmod +x subvars && \
 sudo mv subvars /usr/local/bin/subvars
-```
-
-### Go Get
-
-```bash
-go get -u github.com/kha7iq/subvars
 ```
 
 ### Windows
@@ -72,11 +73,10 @@ and download the binary for windows & all other supported platforms.
 
 ### Docker
 
-Docker container is also available `latest` tage will always pull the latest version avaialbe.
-You can also download a specific version. Checkout [release](https://github.com/kha7iq/subvars/releases)
-page for available versions.
+Docker container is available you can pull the `latest` version or provide specific `tag`
+Checkout [release](https://github.com/kha7iq/subvars/releases) page for available versions.
 
-Run Container
+Running Container
 
 ```bash
 docker pull khaliq/subvars:latest
@@ -84,7 +84,6 @@ docker pull khaliq/subvars:latest
 docker run -it --rm khaliq/subvars:latest --help
 ```
 
-Usage examples for workflow are available in the repo.
 
 ## Usage
 
@@ -98,7 +97,7 @@ USAGE:
    subvars [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.0
+   0.1.2
 
 COMMANDS:
    dir, d   Directory lets you render all files in a folder & subfolder.
@@ -111,14 +110,22 @@ GLOBAL OPTIONS:
    --version, -v                 print the version (default: false)
 ```
 
-Check [Documentation Page](https://subvars.lmno.pk) for more details.
+```bash
+echo "Hey! {{ .USER | upper }} your home folder is {{ .HOME }}" | subvars
+```
+
+```bash
+subvars dir --input examples --out conf
+```
+
+Check [Usage Documentation](https://subvars.lmno.pk/03-usage-examples/) for detailed examples.
 
 ## Configuration
 
 All the flags have corresponding environment variables associated with it. You
 can either provide the value with flags or export to a variable.
 
-View the [Documentation Page](https://subvars.lmno.pk) for more
+View the [Configuration Page](https://subvars.lmno.pk/02-configuration/) for more
 details.
 
 
@@ -138,4 +145,5 @@ Make it better 🕶️
 
 ## Acknowledgments
 
-This tool was inspired by the orignal [python envtpl](https://github.com/andreasjansson/envtpl) project and [subfuzion/envtpl](https://github.com/subfuzion/envtpl/)
+This tool was inspired by the original [python envtpl](https://github.com/andreasjansson/envtpl) 
+project and [subfuzion/envtpl](https://github.com/subfuzion/envtpl/)
