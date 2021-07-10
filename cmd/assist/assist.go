@@ -1,4 +1,6 @@
-package helpers
+package assist
+
+// assist package serve as helper functions and aid to app.
 
 import (
 	"os"
@@ -16,7 +18,9 @@ type Flags struct {
 }
 
 var (
-	GlobalOpts   Flags
+	// GlobalFlags variable holds user input flag values
+	GlobalFlags Flags
+	// EnvVariables is used for saving variables form environment.
 	EnvVariables map[string]string
 )
 
@@ -33,7 +37,13 @@ func GetVars() (enVars map[string]string) {
 // ParseString will parse any input provided as string
 func ParseString(str string) (*template.Template, error) {
 	funcMap := sprig.TxtFuncMap()
-	return template.Must(template.New("").Funcs(funcMap).Funcs(MatchFunc()).Parse(str)), nil
+	return template.Must(template.New("").Funcs(funcMap).Funcs(matchFunc()).Parse(str)), nil
+}
+
+// ParseFile will parse any input provided as string
+func ParseFile(file string) (*template.Template, error) {
+	funcMap := sprig.TxtFuncMap()
+	return template.Must(template.New(filepath.Base(file)).Funcs(funcMap).Funcs(matchFunc()).ParseFiles(file)), nil
 }
 
 // MatchPrefix will match a given prefix pattern of all env variables and render only those.
@@ -48,40 +58,18 @@ func MatchPrefix(prefix string) map[string]string {
 	return enVars
 }
 
-// GetPathInDir Recursively get all file paths in directory, including sub-directories.
-func GetPathInDir(dirpath string) ([]string, error) {
-	var paths []string
-	err := filepath.Walk(dirpath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if !info.IsDir() {
-			paths = append(paths, path)
-		}
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return paths, nil
-}
-
-// CreateDirIfNotExist will check if folder does not exist it will create it.
-func CreateDirIfNotExist(path string) error {
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		if err = os.Mkdir(path, os.ModePerm); err != nil {
-			return err
-		}
-		return err
-	}
-	return nil
-}
-
-// MatchFunc returns a custom functions map
-func MatchFunc() template.FuncMap {
+// matchFunc returns a custom functions map
+func matchFunc() template.FuncMap {
 	functionMap := map[string]interface{}{
 		"match": MatchPrefix,
 	}
 	return functionMap
+}
+
+// IsFlagSet function check if flag is set and returns a boolean true or false
+func IsFlagSet(fl string) bool {
+	if len(fl) != 0 {
+		return true
+	}
+	return false
 }
