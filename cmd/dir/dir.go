@@ -1,24 +1,23 @@
 package dir
 
 import (
+	"fmt"
+	"github.com/kha7iq/subvars/cmd/assist"
+	"github.com/urfave/cli/v2"
 	"os"
 	"path"
 	"path/filepath"
-	"text/template"
-
-	"github.com/Masterminds/sprig/v3"
-
-	"github.com/kha7iq/subvars/cmd/helpers"
-	"github.com/urfave/cli/v2"
 )
 
-type Directory struct {
+type flagsDir struct {
 	InputDir string
 	OutDir   string
 }
 
+// Render function will render all the template files in any given input folder and saves
+// them in target folder.
 func Render() *cli.Command {
-	var subVarsOpts Directory
+	var subVarsOpts flagsDir
 	return &cli.Command{
 		Name:    "dir",
 		Aliases: []string{"d"},
@@ -40,24 +39,26 @@ func Render() *cli.Command {
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-			paths, err := helpers.GetPathInDir(subVarsOpts.InputDir)
+			paths, err := getPathInDir(subVarsOpts.InputDir)
 			if err != nil {
 				return err
 			}
 
 			for _, v := range paths {
-				funcMap := sprig.TxtFuncMap()
-				t := template.Must(template.New(filepath.Base(v)).Funcs(funcMap).Funcs(helpers.MatchFunc()).ParseFiles(v))
-
-				if len(helpers.GlobalOpts.Prefix) != 0 {
-					helpers.EnvVariables = helpers.MatchPrefix(helpers.GlobalOpts.Prefix)
-				} else {
-					helpers.EnvVariables = helpers.GetVars()
+				t, err := assist.ParseFile(v)
+				if err != nil {
+					return fmt.Errorf("unable to parse file \nError: %v", err)
 				}
 
-				t = t.Option("missingkey=" + helpers.GlobalOpts.MissingKey)
-				if len(subVarsOpts.OutDir) != 0 {
-					if err := helpers.CreateDirIfNotExist(subVarsOpts.OutDir); err != nil {
+				if assist.IsFlagSet(assist.GlobalFlags.Prefix); true {
+					assist.EnvVariables = assist.MatchPrefix(assist.GlobalFlags.Prefix)
+				} else {
+					assist.EnvVariables = assist.GetVars()
+				}
+
+				t = t.Option("missingkey=" + assist.GlobalFlags.MissingKey)
+				if assist.IsFlagSet(subVarsOpts.OutDir); true {
+					if err := createDirIfNotExist(subVarsOpts.OutDir); err != nil {
 						return err
 					}
 					_, outfile := path.Split(v)
@@ -65,12 +66,12 @@ func Render() *cli.Command {
 					if err != nil {
 						return err
 					}
-					if err := t.Execute(file, helpers.EnvVariables); err != nil {
+					if err := t.Execute(file, assist.EnvVariables); err != nil {
 						return err
 					}
 					file.Close()
 				} else {
-					if err := t.Execute(os.Stdout, helpers.EnvVariables); err != nil {
+					if err := t.Execute(os.Stdout, assist.EnvVariables); err != nil {
 						return err
 					}
 				}
@@ -79,4 +80,34 @@ func Render() *cli.Command {
 			return nil
 		},
 	}
+}
+
+// getPathInDir recursively get all file paths in directory, including sub-directories.
+func getPathInDir(pid string) ([]string, error) {
+	var paths []string
+	err := filepath.Walk(pid, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return paths, nil
+}
+
+// createDirIfNotExist will check if folder does not exist it will create it.
+func createDirIfNotExist(path string) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		if err = os.Mkdir(path, os.ModePerm); err != nil {
+			return err
+		}
+		return err
+	}
+	return nil
 }
