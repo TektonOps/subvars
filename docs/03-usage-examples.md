@@ -7,7 +7,7 @@ Several files are available in `examples` folder you can `cd` into the folder an
 * Multiple cases are defined in example.tpl file, you can change values and observe output based on that. 
 ```bash
 INTERVAL=2s OUTPUT_INFLUXDB_ENABLED=true \
-HOSTNAME=localhost subvars < example.tpl3e
+HOSTNAME=localhost subvars < example.tpl
 ```
 Output: 
 ```bash
