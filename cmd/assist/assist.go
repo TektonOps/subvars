@@ -67,6 +67,7 @@ func matchFunc() template.FuncMap {
 }
 
 // IsFlagSet function check if flag is set and returns a boolean true or false
+//nolint
 func IsFlagSet(fl string) bool {
 	if len(fl) != 0 {
 		return true

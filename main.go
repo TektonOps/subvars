@@ -52,7 +52,7 @@ func main() {
 			return fmt.Errorf("unable to parse string stream \nError: %v", err)
 		}
 
-		if assist.IsFlagSet(assist.GlobalFlags.Prefix); true {
+		if assist.IsFlagSet(assist.GlobalFlags.Prefix) {
 			assist.EnvVariables = assist.MatchPrefix(assist.GlobalFlags.Prefix)
 		} else {
 			assist.EnvVariables = assist.GetVars()

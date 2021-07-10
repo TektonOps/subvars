@@ -2,11 +2,12 @@ package dir
 
 import (
 	"fmt"
-	"github.com/kha7iq/subvars/cmd/assist"
-	"github.com/urfave/cli/v2"
 	"os"
 	"path"
 	"path/filepath"
+
+	"github.com/kha7iq/subvars/cmd/assist"
+	"github.com/urfave/cli/v2"
 )
 
 type flagsDir struct {
@@ -50,14 +51,14 @@ func Render() *cli.Command {
 					return fmt.Errorf("unable to parse file \nError: %v", err)
 				}
 
-				if assist.IsFlagSet(assist.GlobalFlags.Prefix); true {
+				if assist.IsFlagSet(assist.GlobalFlags.Prefix) {
 					assist.EnvVariables = assist.MatchPrefix(assist.GlobalFlags.Prefix)
 				} else {
 					assist.EnvVariables = assist.GetVars()
 				}
 
 				t = t.Option("missingkey=" + assist.GlobalFlags.MissingKey)
-				if assist.IsFlagSet(subVarsOpts.OutDir); true {
+				if assist.IsFlagSet(subVarsOpts.OutDir) {
 					if err := createDirIfNotExist(subVarsOpts.OutDir); err != nil {
 						return err
 					}
