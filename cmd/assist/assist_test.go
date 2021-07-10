@@ -8,6 +8,7 @@ import (
 	"text/template"
 )
 
+//nolint
 func TestGetVars(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -20,14 +21,13 @@ func TestGetVars(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotEnVars := GetVars(); reflect.DeepEqual(gotEnVars, tt.wantEnVars) {
 				t.Errorf("GetVars() = %v, want %v", gotEnVars, tt.wantEnVars)
-
 			}
 		})
 	}
 }
 
+//nolint
 func TestIsFlagSet(t *testing.T) {
-
 	tests := []struct {
 		name string
 		args string
@@ -45,6 +45,7 @@ func TestIsFlagSet(t *testing.T) {
 	}
 }
 
+//nolint
 func TestMatchPrefix(t *testing.T) {
 	_ = os.Setenv("TESTING_PREFIX_MATCH", "matched")
 	tests := []struct {
@@ -63,6 +64,7 @@ func TestMatchPrefix(t *testing.T) {
 	}
 }
 
+//nolint
 func TestParseFile(t *testing.T) {
 	tmpFile, _ := ioutil.TempFile(os.TempDir(), "prefix-")
 	filename := tmpFile.Name()
@@ -85,8 +87,8 @@ func TestParseFile(t *testing.T) {
 	}
 }
 
+//nolint
 func TestParseString(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		args    string

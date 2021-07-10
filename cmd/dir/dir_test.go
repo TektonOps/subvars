@@ -8,8 +8,8 @@ import (
 	"testing"
 )
 
+//nolint
 func Test_createDirIfNotExist(t *testing.T) {
-
 	dir, _ := ioutil.TempDir("", "example")
 	defer os.RemoveAll(dir) // clean up
 	tests := []struct {
@@ -29,6 +29,7 @@ func Test_createDirIfNotExist(t *testing.T) {
 	}
 }
 
+//nolint
 func Test_getPathInDir(t *testing.T) {
 	content := []byte("temporary file's content")
 	dir, _ := ioutil.TempDir("", "example")
