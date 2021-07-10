@@ -14,6 +14,10 @@
    <img alt="GitHub issues" src="https://img.shields.io/github/issues/kha7iq/subvars?style=flat-square&logo=github&logoColor=white">
    <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE.md">
    <img alt="License" src="https://img.shields.io/github/license/kha7iq/subvars">
+   <a href="https://codecov.io/gh/kha7iq/subvars">
+  <img src="https://codecov.io/gh/kha7iq/subvars/branch/master/graph/badge.svg"/>
+</a>
+
    <a href="https://pkg.go.dev/github.com/kha7iq/subvars">
    <img alt="Go Dev Reference" src="https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat"></a></a></a></a></a></a>
 </p>
