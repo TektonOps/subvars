@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/kha7iq/subvars/cmd/assist"
 	"github.com/kha7iq/subvars/cmd/dir"
-	"github.com/kha7iq/subvars/cmd/helpers"
 
 	"github.com/urfave/cli/v2"
 )
@@ -27,11 +27,11 @@ func main() {
 			Name:        "prefix",
 			Aliases:     []string{"pr"},
 			Usage:       "Match only variables with given prefix pattern",
-			Destination: &helpers.GlobalOpts.Prefix,
+			Destination: &assist.GlobalFlags.Prefix,
 			EnvVars:     []string{"SUBVARS_PREFIX"},
 		},
 		&cli.StringFlag{
-			Destination: &helpers.GlobalOpts.MissingKey,
+			Destination: &assist.GlobalFlags.MissingKey,
 			Name:        "missingkey",
 			Aliases:     []string{"m"},
 			Usage: "Behavior for missing key when parsing variables." +
@@ -47,18 +47,18 @@ func main() {
 			return fmt.Errorf("unable to read input \nError: %v", err)
 		}
 
-		t, err := helpers.ParseString(string(b))
+		t, err := assist.ParseString(string(b))
 		if err != nil {
 			return fmt.Errorf("unable to parse string stream \nError: %v", err)
 		}
 
-		if len(helpers.GlobalOpts.Prefix) != 0 {
-			helpers.EnvVariables = helpers.MatchPrefix(helpers.GlobalOpts.Prefix)
+		if assist.IsFlagSet(assist.GlobalFlags.Prefix) {
+			assist.EnvVariables = assist.MatchPrefix(assist.GlobalFlags.Prefix)
 		} else {
-			helpers.EnvVariables = helpers.GetVars()
+			assist.EnvVariables = assist.GetVars()
 		}
-		t = t.Option("missingkey=" + helpers.GlobalOpts.MissingKey)
-		if err := t.Execute(os.Stdout, helpers.EnvVariables); err != nil {
+		t = t.Option("missingkey=" + assist.GlobalFlags.MissingKey)
+		if err := t.Execute(os.Stdout, assist.EnvVariables); err != nil {
 			return err
 		}
 		return nil
