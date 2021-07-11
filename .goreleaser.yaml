@@ -75,6 +75,12 @@ scoop:
  description: Substitute environment variables from command line in config files defined as go template format.
  license: MIT
 
+publishers:
+  - name: aur-subvars
+    env:
+      - AUR_SSH_PRIVATE_KEY={{ .Env.AUR_SSH_PRIVATE_KEY }}
+    cmd: |
+      .github/aur/subvars/publish.sh {{ .Version }}
 
 dockers:
 - image_templates:
