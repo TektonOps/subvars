@@ -1,9 +1,9 @@
-name: build
+name: build & release
 
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v0.[0-9]+.[0-9]'
 
 jobs:
   release-subvars:
@@ -43,6 +43,7 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
 
       - name: Notify on failure
         uses: kha7iq/pingme-action@v1

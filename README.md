@@ -55,8 +55,14 @@ and output to another folder is available via `dir` subcommand.
 brew install kha7iq/tap/subvars
 ```
 
-### Linux Binary
+### Linux
 
+* AUR
+```bash
+yay -S subvars
+```
+
+* Binary
 ```bash
 export SUBVARS_VERSION="0.1.2"
 wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz && \
