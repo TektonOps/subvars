@@ -156,4 +156,4 @@ Make it better 🕶️
 ## Acknowledgments
 
 This tool was inspired by the original [python envtpl](https://github.com/andreasjansson/envtpl) 
-project and [subfuzion/envtpl](https://github.com/subfuzion/envtpl/)
+project and [subfuzion](https://github.com/subfuzion/envtpl/)
