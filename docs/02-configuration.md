@@ -9,7 +9,7 @@ subvars dir [command options] [arguments...]
 ```
 
 * Directory `dir` subcommand lets you render all files in a folder & subfolder, and writes the output to `stdout`.
-  you can also set an output folder where rendered files will be saved insted of stdout with `--outdir` flag. The filename will be same. If the folder does not exists it will be created automatically.
+  you can also set an output folder where rendered files will be saved insted of stdout with `--out` flag. The filename will be same. If the folder does not exists it will be created automatically.
 * `subvars` reads the template directly from `stdin`
 * Renderd output will be written to `stdout`
 
