@@ -4,7 +4,6 @@ package assist
 
 import (
 	"os"
-	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -37,13 +36,7 @@ func GetVars() (enVars map[string]string) {
 // ParseString will parse any input provided as string
 func ParseString(str string) (*template.Template, error) {
 	funcMap := sprig.TxtFuncMap()
-	return template.Must(template.New("").Funcs(funcMap).Funcs(matchFunc()).Parse(str)), nil
-}
-
-// ParseFile will parse any input provided as string
-func ParseFile(file string) (*template.Template, error) {
-	funcMap := sprig.TxtFuncMap()
-	return template.Must(template.New(filepath.Base(file)).Funcs(funcMap).Funcs(matchFunc()).ParseFiles(file)), nil
+	return template.Must(template.New("").Funcs(funcMap).Funcs(MatchFunc()).Parse(str)), nil
 }
 
 // MatchPrefix will match a given prefix pattern of all env variables and render only those.
@@ -58,8 +51,8 @@ func MatchPrefix(prefix string) map[string]string {
 	return enVars
 }
 
-// matchFunc returns a custom functions map
-func matchFunc() template.FuncMap {
+// MatchFunc returns a custom functions map
+func MatchFunc() template.FuncMap {
 	functionMap := map[string]interface{}{
 		"match": MatchPrefix,
 	}

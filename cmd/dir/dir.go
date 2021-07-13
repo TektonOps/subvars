@@ -1,10 +1,12 @@
 package dir
 
 import (
-	"fmt"
 	"os"
 	"path"
 	"path/filepath"
+	"text/template"
+
+	"github.com/Masterminds/sprig/v3"
 
 	"github.com/kha7iq/subvars/cmd/assist"
 	"github.com/urfave/cli/v2"
@@ -46,10 +48,7 @@ func Render() *cli.Command {
 			}
 
 			for _, v := range paths {
-				t, err := assist.ParseFile(v)
-				if err != nil {
-					return fmt.Errorf("unable to parse file \nError: %v", err)
-				}
+				t := parseFile(v)
 
 				if assist.IsFlagSet(assist.GlobalFlags.Prefix) {
 					assist.EnvVariables = assist.MatchPrefix(assist.GlobalFlags.Prefix)
@@ -59,11 +58,11 @@ func Render() *cli.Command {
 
 				t = t.Option("missingkey=" + assist.GlobalFlags.MissingKey)
 				if assist.IsFlagSet(subVarsOpts.OutDir) {
-					if err := createDirIfNotExist(subVarsOpts.OutDir); err != nil {
+					subDir, outfile := path.Split(v)
+					if err := createDirIfNotExist(subVarsOpts.OutDir + "/" + subDir); err != nil {
 						return err
 					}
-					_, outfile := path.Split(v)
-					file, err := os.Create(subVarsOpts.OutDir + "/" + outfile)
+					file, err := os.Create(subVarsOpts.OutDir + "/" + subDir + outfile)
 					if err != nil {
 						return err
 					}
@@ -105,10 +104,16 @@ func getPathInDir(pid string) ([]string, error) {
 // createDirIfNotExist will check if folder does not exist it will create it.
 func createDirIfNotExist(path string) error {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		if err = os.Mkdir(path, os.ModePerm); err != nil {
+		if err = os.MkdirAll(path, os.ModePerm); err != nil {
 			return err
 		}
 		return err
 	}
 	return nil
+}
+
+// parseFile will parse any input provided as string
+func parseFile(file string) *template.Template {
+	funcMap := sprig.TxtFuncMap()
+	return template.Must(template.New(filepath.Base(file)).Funcs(funcMap).Funcs(assist.MatchFunc()).ParseFiles(file))
 }

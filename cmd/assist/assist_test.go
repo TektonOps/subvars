@@ -1,7 +1,6 @@
 package assist
 
 import (
-	"io/ioutil"
 	"os"
 	"reflect"
 	"testing"
@@ -59,29 +58,6 @@ func TestMatchPrefix(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := MatchPrefix(tt.prefix); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("MatchPrefix() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-//nolint
-func TestParseFile(t *testing.T) {
-	tmpFile, _ := ioutil.TempFile(os.TempDir(), "prefix-")
-	filename := tmpFile.Name()
-	defer os.Remove(tmpFile.Name())
-	tests := []struct {
-		name    string
-		file    string
-		wantErr bool
-	}{
-		{"Parse files", filename, false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			_, err := ParseFile(tt.file)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("ParseFile() error = %v, wantErr %v", err, tt.wantErr)
-				return
 			}
 		})
 	}

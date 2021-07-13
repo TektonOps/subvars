@@ -9,9 +9,9 @@ subvars dir [command options] [arguments...]
 ```
 
 * Directory `dir` subcommand lets you render all files in a folder & subfolder, and writes the output to `stdout`.
-  you can also set an output folder where rendered files will be saved insted of stdout with `--out` flag. The filename will be same. If the folder does not exists it will be created automatically.
+  you can also set an output folder where rendered files will be saved instead of stdout with `--out` flag. The filename will be same. If the folder does not exist it will be created automatically.
 * `subvars` reads the template directly from `stdin`
-* Renderd output will be written to `stdout`
+* Rendered output will be written to `stdout`
 
 ## Flags
 
@@ -22,8 +22,7 @@ subvars dir [command options] [arguments...]
 
 * Missing keys in the template will be substituted with the string `<no value>`.
 
-* If `missingkey` is set to `zero`, missing keys will be substituted with zero value of data type (ie: an empty
-  string).
+* If `missingkey` is set to `zero`, missing keys will be substituted with zero value of data type (i.e: an empty string).
 
 * If `missingkey` is set to `error`, `subvars` will fail and
   returns an error to the caller when missing any key.
@@ -41,9 +40,11 @@ It can also be configured by exporting environment variable `SUBVARS_INPUTDIR`.
 
 
 ### Out
-Input flag `--out` is available for the subcommand `dir`, when using subcommand you can specify an output folder where rendered files will be saved.
+Flag `--out` is available for the subcommand `dir`, when using subcommand you can specify an output folder
+where rendered files will be saved.
 
-If the folder does not exist it will be created automatically, the output filename will remain the same as input templates.
+If the folder does not exist it will be created automatically, preserving subfolder and file structure 
+the output filename will remain the same as input templates.
 
 This setting can also be configured by exporting environment variable `SUBVARS_OUTDIR`.
 

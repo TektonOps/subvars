@@ -44,7 +44,7 @@ which provides additional functions apart from standard library.
 You can pipe the input or `<` direct it to subvars.
 
 Options to [render all files](https://subvars.lmno.pk/03-usage-examples/) in a given folder
-and output to another folder is available via `dir` subcommand.
+and output to another folder preserving folder and file structure is available via `dir` subcommand.
 
 
 ## Installation
