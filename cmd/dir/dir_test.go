@@ -58,3 +58,24 @@ func Test_getPathInDir(t *testing.T) {
 		})
 	}
 }
+
+//nolint
+func Test_parseFile(t *testing.T) {
+	tmpFile, _ := ioutil.TempFile(os.TempDir(), "prefix-")
+	filename := tmpFile.Name()
+	defer os.Remove(tmpFile.Name())
+	tests := []struct {
+		name    string
+		file    string
+		wantErr bool
+	}{
+		{"Parse files", filename, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := parseFile(tt.file); reflect.DeepEqual(got, tt.wantErr) {
+				t.Errorf("parseFile() = %v, want %v", got, tt.wantErr)
+			}
+		})
+	}
+}
