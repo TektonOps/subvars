@@ -65,8 +65,8 @@ yay -S subvars
 * Binary
 ```bash
 export SUBVARS_VERSION="0.1.2"
-wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Darwin_x86_64.tar.gz && \
-tar -xf subvars_Darwin_x86_64.tar.gz && \
+wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Linux_x86_64.tar.gz && \
+tar -xf subvars_Linux_x86_64.tar.gz && \
 chmod +x subvars && \
 sudo mv subvars /usr/local/bin/subvars
 ```
