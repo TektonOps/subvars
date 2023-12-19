@@ -62,8 +62,6 @@ nfpms:
     formats:
     - deb
     - rpm
-    dependencies:
-    - git
 
 
 scoop:
