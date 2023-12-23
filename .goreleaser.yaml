@@ -12,7 +12,7 @@ builds:
     - darwin
     - windows
   goarch:
-    - 386
+    - "386"
     - amd64
     - arm
     - arm64
@@ -30,19 +30,18 @@ changelog:
     exclude: ['^docs:', '^test:', 'Merge pull request', 'Merge branch', 'go mod tidy']
 
 archives:
-  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
-    format_overrides:
-    - goos: windows
-      format: zip
+- name_template: >-
+    {{ .ProjectName }}_
+    {{- title .Os }}_
+    {{- if eq .Arch "amd64" }}x86_64
+    {{- else if eq .Arch "386" }}i386
+    {{- else }}{{ .Arch }}{{ end }}
+  format_overrides:
+  - goos: windows
+    format: zip
 
 brews:
- - tap:
+ - repository:
      owner: kha7iq
      name: homebrew-tap
    folder: Formula
@@ -56,6 +55,7 @@ brews:
 
 nfpms:
   - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    maintainer: 'Abdul Khaliq <a.khaliq@outlook.my>'
     homepage:  subvars.lmno.pk
     description: Substitute environment variables from command line in config files defined as go template format.
     license: MIT
@@ -65,14 +65,14 @@ nfpms:
     - rpm
 
 
-scoop:
- url_template: "https://github.com/kha7iq/subvars/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
- bucket:
-   owner: kha7iq
-   name: scoop-bucket
- homepage:  https://subvars.lmno.pk
- description: Substitute environment variables from command line in config files defined as go template format.
- license: MIT
+scoops:
+  - repository:
+      owner: kha7iq
+      name: scoop-bucket
+    url_template: "https://github.com/kha7iq/subvars/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    homepage:  https://subvars.lmno.pk
+    description: Substitute environment variables from command line in config files defined as go template format.
+    license: MIT
 
 
 dockers:
