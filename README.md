@@ -9,7 +9,7 @@
    <a href="https://goreportcard.com/report/github.com/kha7iq/subvars">
    <img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/kha7iq/subvars">
    <a href="#">
-   <img alt="Build" src="https://img.shields.io/github/workflow/status/kha7iq/subvars/build">
+   <img alt="Build" src="https://img.shields.io/github/actions/workflow/status/kha7iq/subvars/.github%2Fworkflows%2Fbuild.yml">
    <a href="https://github.com/kha7iq/subvars/issues">
    <img alt="GitHub issues" src="https://img.shields.io/github/issues/kha7iq/subvars?style=flat-square&logo=github&logoColor=white">
    <a href="https://github.com/kha7iq/subvars/blob/master/LICENSE.md">
@@ -64,7 +64,7 @@ yay -S subvars
 
 * Binary
 ```bash
-export SUBVARS_VERSION="0.1.2"
+export SUBVARS_VERSION="0.1.5"
 wget -q https://github.com/kha7iq/subvars/releases/download/v${SUBVARS_VERSION}/subvars_Linux_x86_64.tar.gz && \
 tar -xf subvars_Linux_x86_64.tar.gz && \
 chmod +x subvars && \
